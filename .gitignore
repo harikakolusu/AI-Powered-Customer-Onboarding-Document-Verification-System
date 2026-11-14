@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Environment Variables & Secrets (CRITICAL: Do not commit real keys)
+.env
+*.env
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Databases & local uploads
+storage/*.db
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+# IDE configuration
+.vscode/
+.idea/

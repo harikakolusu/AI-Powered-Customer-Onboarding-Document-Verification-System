@@ -1,0 +1,15 @@
+streamlit>=1.35.0
+pydantic>=2.7.0
+sqlalchemy>=2.0.0
+plotly>=5.20.0
+pandas>=2.0.0
+numpy>=1.26.0
+pillow>=10.0.0
+opencv-python>=4.9.0
+google-generativeai>=0.7.0
+pypdf>=5.0.0
+python-dotenv>=1.0.0
+pytest>=8.0.0
+fastapi>=0.110.0
+uvicorn>=0.29.0
+
