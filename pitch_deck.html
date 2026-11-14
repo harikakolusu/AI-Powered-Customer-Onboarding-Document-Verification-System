@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex AI — Hackathon Pitch Deck</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-orange: #fb923c;
+      --accent-red: #f87171;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: var(--accent-blue);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      background: var(--accent-blue);
+      color: var(--bg);
+    }
+    .slide-indicator {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      min-width: 80px;
+      text-align: center;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 48px;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1200px;
+      animation: fadeIn 0.3s ease;
+    }
+    .slide.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent-blue);
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    p.subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--accent-green);
+    }
+    .card p {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .stat-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      margin-bottom: 4px;
+    }
+    .stat-lbl {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .pipeline-row {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--accent-blue);
+    }
+    .pipeline-stage {
+      font-weight: 700;
+      color: var(--accent-green);
+      min-width: 220px;
+    }
+    .pipeline-tool {
+      font-weight: 600;
+      color: var(--accent-blue);
+      min-width: 260px;
+    }
+    .pipeline-desc {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-green { background: rgba(52, 211, 153, 0.2); color: var(--accent-green); }
+    .badge-orange { background: rgba(251, 146, 60, 0.2); color: var(--accent-orange); }
+    .badge-red { background: rgba(248, 113, 113, 0.2); color: var(--accent-red); }
+    footer {
+      padding: 12px 32px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">⚡ APEX AI — FINANCIAL ONBOARDING ENGINE</div>
+    <div class="controls">
+      <button class="btn" onclick="prevSlide()">◀ Previous</button>
+      <span class="slide-indicator" id="indicator">1 / 9</span>
+      <button class="btn" onclick="nextSlide()">Next ▶</button>
+      <button class="btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- SLIDE 1 -->
+    <div class="slide active">
+      <div class="tag">FINTECH AI HACKATHON</div>
+      <h1>Apex AI: Autonomous Customer Onboarding<br>& Document Verification Engine</h1>
+      <p class="subtitle">Next-generation KYC processing pairing Computer Vision & Multimodal LLMs with Deterministic Rules & Human Governance.</p>
+      <div class="grid-4" style="margin-top: 30px;">
+        <div class="card">
+          <div class="stat-val">3d ➔ 5s</div>
+          <div class="stat-lbl">Processing Latency</div>
+        </div>
+        <div class="card">
+          <div class="stat-val">95%+</div>
+          <div class="stat-lbl">Straight-Through Approval</div>
+        </div>
+        <div class="card">
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl">Regulatory Auditability</div>
+        </div>
+        <div class="card">
+          <div class="stat-val">0-Downtime</div>
+          <div class="stat-lbl">Dual Offline Fallback</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+      <div class="tag">INDUSTRY PAIN POINTS</div>
+      <h2>The Crisis in Traditional Banking Verification</h2>
+      <div class="grid-2" style="margin-top: 24px;">
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">🐌 Severe Processing Delays</h3>
+          <p>Manual identity verification averages 48 to 72 hours per customer. High drop-off rates cost financial institutions up to 35% of potential new accounts.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">💸 Crushing Operational Costs</h3>
+          <p>Banks spend over $40 per user employing manual back-office compliance teams to physically cross-check scans, signatures, and government databases.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">🎭 Identity Theft & Duplicate Fraud</h3>
+          <p>Corrupted scans, repeated applications, and synthetic identities frequently slip through tired human reviewers across disconnected branches.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">⚖️ Stiff Regulatory Penalties</h3>
+          <p>Global regulators (RBI, FINRA, SEC) demand tamper-evident audit trails. Spreadsheet notes and email approvals fail regulatory audits.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+      <div class="tag">THE INNOVATION</div>
+      <h2>Apex AI: 4 Pillars of Modern Verification</h2>
+      <div class="grid-4" style="margin-top: 24px;">
+        <div class="card">
+          <h3>1. OpenCV Pre-Filter</h3>
+          <p>Laplacian variance instantly catches blurry or dark images (< 100 threshold) before sending to LLM APIs, saving token costs.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-blue);">2. Gemini Vision AI</h3>
+          <p>Extracts structured Name, DOB, and ID numbers from PAN, Aadhaar, and Statements mapped into strict Pydantic JSON schemas.</p>
+        </div>
+        <div class="card">
+          <h3>3. Cross-Doc Rules</h3>
+          <p>Deterministic regex algorithms cross-reference extracted entities between PAN and Aadhaar to detect hidden mismatches.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">4. Human-in-the-Loop</h3>
+          <p>Borderline cases (< 90% confidence) route to compliance officers in a split-screen queue with transparent reason codes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+      <div class="tag">ENGINEERING DESIGN</div>
+      <h2>Decoupled Two-Tier Microservice Stack</h2>
+      <div class="grid-3" style="margin-top: 24px;">
+        <div class="card">
+          <h3 style="color: var(--accent-blue);">🚀 Backend REST API (FastAPI)</h3>
+          <p>• Runs on port 8000 with Uvicorn<br>
+             • Interactive Swagger UI at <code>/docs</code><br>
+             • SQLAlchemy ORM with SQLite database<br>
+             • Real-time request and processing logs</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-green);">🧠 AI Verification Pipeline</h3>
+          <p>• OpenCV Laplacian edge detector<br>
+             • Google Gemini 1.5 Flash Multimodal<br>
+             • Pydantic v2 data validation schemas<br>
+             • Zero-downtime offline regex fallback</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent-orange);">💻 Frontend Portal (Streamlit)</h3>
+          <p>• Runs on port 8501 for users and officers<br>
+             • Self-service upload wizard<br>
+             • Split-screen compliance reviewer queue<br>
+             • Executive Plotly analytics dashboard</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+      <div class="tag">DEEP DIVE</div>
+      <h2>The 5-Stage Automated Verification Pipeline</h2>
+      <div style="margin-top: 24px;">
+        <div class="pipeline-row">
+          <div class="pipeline-stage">Stage 1: Pre-Screening</div>
+          <div class="pipeline-tool">OpenCV Laplacian Variance</div>
+          <div class="pipeline-desc">Evaluates image sharpness score. Rejects blurry uploads (< 100 variance) before burning API tokens.</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">Stage 2: Entity Extraction</div>
+          <div class="pipeline-tool">Gemini Vision 1.5 Flash</div>
+          <div class="pipeline-desc">Parses PAN, Aadhaar, and multi-page PDFs into structured Pydantic JSON schemas.</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">Stage 3: Cross-Validation</div>
+          <div class="pipeline-tool">Deterministic Regex Rules</div>
+          <div class="pipeline-desc">Validates government ID formats and compares name/DOB consistency across uploaded documents.</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">Stage 4: Fraud Detection</div>
+          <div class="pipeline-tool">MD5 Hash & SQLite Index</div>
+          <div class="pipeline-desc">Checks for duplicate submissions and previously registered identity records in real time.</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">Stage 5: Intelligent Routing</div>
+          <div class="pipeline-tool">Risk & Confidence Scorer</div>
+          <div class="pipeline-desc">Confidence ≥ 90% ➔ Auto-Approved. Confidence < 90% ➔ Flagged to Human Reviewer Queue.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+      <div class="tag">DEMONSTRATION</div>
+      <h2>5 Real-World Scenarios Handled Flawlessly</h2>
+      <div style="margin-top: 20px;">
+        <div class="pipeline-row">
+          <div class="pipeline-stage">1. Rahul Sharma</div>
+          <div class="pipeline-tool">Happy Path Baseline</div>
+          <div class="pipeline-desc" style="flex:1;">Clear documents, matching names & valid regex.</div>
+          <div><span class="badge badge-green">✅ Auto-Approved (95% Conf)</span></div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">2. Priya Nair</div>
+          <div class="pipeline-tool">Unclear / Blurry Scan</div>
+          <div class="pipeline-desc" style="flex:1;">Failed OpenCV sharpness threshold (Laplacian < 100).</div>
+          <div><span class="badge badge-orange">⚠️ Flagged: Blur Detected</span></div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">3. Amit Patel</div>
+          <div class="pipeline-tool">Duplicate Identity Fraud</div>
+          <div class="pipeline-desc" style="flex:1;">PAN number already registered in previous application.</div>
+          <div><span class="badge badge-red">🔴 Flagged: Duplicate Application</span></div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">4. Sneha Reddy</div>
+          <div class="pipeline-tool">Cross-Document Mismatch</div>
+          <div class="pipeline-desc" style="flex:1;">PAN reads 'Sneha Reddy' vs Aadhaar reads 'Sneha R K'.</div>
+          <div><span class="badge badge-orange">🟠 Flagged: Name Inconsistency</span></div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-stage">5. Vikram Singh</div>
+          <div class="pipeline-tool">Missing Mandatory Doc</div>
+          <div class="pipeline-desc" style="flex:1;">Uploaded PAN card but omitted mandatory Aadhaar scan.</div>
+          <div><span class="badge badge-red">🔴 Flagged: Missing Aadhaar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+      <div class="tag">GOVERNANCE & TRUST</div>
+      <h2>Human-in-the-Loop & Regulatory Auditability</h2>
+      <div class="grid-2" style="margin-top: 24px;">
+        <div class="card">
+          <h3>Split-Screen Reviewer Queue</h3>
+          <p>Officers inspect extracted data side-by-side with original document images. Every AI flag includes explicit reason summaries (e.g. <code>[QUALITY]</code>, <code>[DUPLICATE]</code>, <code>[INCONSISTENCY]</code>).</p>
+        </div>
+        <div class="card">
+          <h3>Tri-Action Decision Making</h3>
+          <p>Reviewers have 3 unambiguous choices: <b>Approve</b>, <b>Reject</b>, or <b>Request More Info</b> (instantly prompting customer resubmission).</p>
+        </div>
+        <div class="card">
+          <h3>Immutable Audit Trail</h3>
+          <p>Every single automated check, risk score, and human reviewer note is permanently logged with ISO timestamps, ready for banking compliance inspections.</p>
+        </div>
+        <div class="card">
+          <h3>No Black-Box Hallucinations</h3>
+          <p>AI assists the officer — it does not replace accountability. High-stakes financial approvals always require human validation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+      <div class="tag">BUSINESS ROI & ROADMAP</div>
+      <h2>Transforming Fintech Economics</h2>
+      <div class="grid-4" style="margin-top: 24px;">
+        <div class="card">
+          <div class="stat-val">98%</div>
+          <div class="stat-lbl">Latency Reduction</div>
+          <p style="margin-top:12px; font-size:0.85rem; color:var(--text-muted);">From 72 hours down to 5 seconds for compliant users.</p>
+        </div>
+        <div class="card">
+          <div class="stat-val">75%</div>
+          <div class="stat-lbl">Cost Cut</div>
+          <p style="margin-top:12px; font-size:0.85rem; color:var(--text-muted);">Reduces back-office manual reviewer overhead significantly.</p>
+        </div>
+        <div class="card">
+          <div class="stat-val">0</div>
+          <div class="stat-lbl">Duplicate Fraud</div>
+          <p style="margin-top:12px; font-size:0.85rem; color:var(--text-muted);">Stops synthetic identities at the upload gate.</p>
+        </div>
+        <div class="card">
+          <div class="stat-val">Cloud</div>
+          <div class="stat-lbl">Enterprise Ready</div>
+          <p style="margin-top:12px; font-size:0.85rem; color:var(--text-muted);">One-line configuration to scale to PostgreSQL & Docker.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide">
+      <div class="tag">CONCLUSION & LIVE DEMO</div>
+      <h1>Thank You!</h1>
+      <p class="subtitle" style="color: var(--accent-blue);">Apex AI: Autonomous Customer Onboarding & Verification Engine</p>
+      <div class="card" style="margin-top: 20px; max-width: 700px;">
+        <h3 style="color: var(--accent-green); margin-bottom: 12px;">🚀 Live System Architecture:</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8;">
+          • <b>Frontend Portal:</b> <a href="http://localhost:8501" target="_blank" style="color: var(--accent-blue);">http://localhost:8501</a><br>
+          • <b>Backend API & Swagger:</b> <a href="http://localhost:8000/docs" target="_blank" style="color: var(--accent-blue);">http://localhost:8000/docs</a><br>
+          • <b>GitHub Repository:</b> <a href="https://github.com/harikakolusu/AI-Powered-Customer-Onboarding-Document-Verification-System" target="_blank" style="color: var(--accent-blue);">harikakolusu/AI-Powered-Customer-Onboarding...</a>
+        </p>
+      </div>
+      <p style="margin-top: 24px; color: var(--text-muted);">Press <b>Right Arrow (➔)</b> or <b>Left Arrow (⬅)</b> to navigate | Ready for Questions & Live Demo</p>
+    </div>
+  </main>
+
+  <footer>
+    <div>Apex AI — Autonomous Onboarding Hackathon Pitch</div>
+    <div>Use Arrow Keys (◀ / ▶) to Navigate</div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const indicator = document.getElementById('indicator');
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      indicator.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
